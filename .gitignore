@@ -8,3 +8,4 @@ venv
 *.dll
 *.pyd
 tor_exit_nodes.txt
+tor_nodes.txt

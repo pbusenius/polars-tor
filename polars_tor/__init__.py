@@ -22,3 +22,11 @@ def is_tor_exit_node(expr: IntoExprColumn) -> pl.Expr:
         is_elementwise=True,
     )
 
+def is_tor_node(expr: IntoExprColumn) -> pl.Expr:
+    return register_plugin_function(
+        args=[expr],
+        plugin_path=LIB,
+        function_name="is_tor_node",
+        is_elementwise=True
+    )
+
