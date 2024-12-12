@@ -15,7 +15,7 @@ This plugin extends the functionality of [Polars](https://www.pola.rs) by provid
 Install Polars with:
 
 ```bash
-pip install polars
+uv add polars
 ```
 
 - Tor Node List: The list of Tor nodes must be provided as a file (e.g., `tor-nodes.csv`) in CSV format. This file can be downloaded from sources such as the [dan.me](https://www.dan.me.uk/torlist) or other maintained Tor node lists.
