@@ -1,11 +1,25 @@
 import polars as pl
-from polars_tor import is_tor_exit_node, is_tor_node
+from polars_tor import is_tor_node, is_tor_exit_node
 
+# Example DataFrame with IP addresses
+df = pl.DataFrame({
+    "ip_addresses": ["1.1.1.1", "185.220.101.1", "8.8.8.8"]
+})
 
-df = pl.DataFrame(
-    {
-        "ip": ["102.130.113.19", "102.130.117.167", "102.130.127.117", "103.109.101.105", "103.126.161.54", "103.163.218.11"],
-    }
+# Load the Tor nodes list
+tor_nodes_path = "tor-nodes.csv"
+
+# Perform the lookup for Tor nodes
+df = df.with_columns(
+    is_tor_node(df["ip_addresses"]).alias("is_tor_node")
 )
-result = df.with_columns(is_tor_exit_node=is_tor_exit_node("ip"), is_tor_node=is_tor_node("ip"))
-print(result)
+
+# Load the Tor exit nodes list
+tor_exit_nodes_path = "tor-exit-nodes.csv"
+
+# Perform the lookup for Tor exit nodes
+df = df.with_columns(
+    is_tor_exit_node(df["ip_addresses"]).alias("is_tor_exit_node")
+)
+
+print(df)
